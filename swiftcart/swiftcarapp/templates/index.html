@@ -1,0 +1,202 @@
+{% extends 'base/nav.html' %}
+{% load static %}
+{% block content %}
+<!-- <h2 class="mb-4">Browse Products</h2> -->
+
+<!-- <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+  </div>
+</div> -->
+<!-- Search Bar -->
+<div class="search-bar bg-light py-3 shadow-sm sticky-top">
+  <div class="container">
+    <form class="d-flex mx-auto search-form" style="max-width: 600px;" method="GET" action="{% url 'index' %}">
+    <input class="form-control me-2 rounded-pill shadow-sm" 
+           type="search" 
+           name="q"
+           placeholder="Search for products..." 
+           aria-label="Search">
+    <button class="btn btn-success rounded-pill px-4" type="submit">
+        <i class="bi bi-search"></i>
+    </button>
+</form>
+
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar bg-white py-2 shadow-sm">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+      <ul class="filter-list">
+        <li><a href="#" class="filterbutton" data-gender="all" >All</a></li>
+        <li><a href="#" class="filterbutton" data-gender="ladies">Female</a></li>
+        <li><a href="#" class="filterbutton" data-gender="gents">Male</a></li>
+        <li><a href="#" class="filterbutton" data-gender="unisex">Unisex</a></li>
+        <li><a href="#" class="filterbutton" data-gender="gaming&sports">Gaming & Sports</a></li>
+        <li><a href="#"class="filterbutton" data-gender="kids">kids</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container py-4">
+  <div class="row">
+    <!-- Sidebar (Sticky) -->
+    <aside class="col-md-3 mb-4 sidebar-sticky">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Categories</h5>
+        </div>
+        <div class="card-body">
+          <!-- <h6 class="fw-bold">Categories</h6> -->
+          <ul class="list-unstyled">
+             <li><a href="#" class="filter-link" data-category="all">All</a></li>
+            <li><a href="#" class="filter-link" data-category="apparel">Aparrel</a></li>
+            <li><a href="#" class="filter-link" data-category="accessories">Accessories</a></li>
+            <li><a href="#" class="filter-link" data-category="shoes">Shoes</a></li>
+            <li><a href="#" class="filter-link" data-category="suites">suites</a></li>
+            <li><a href="#" class="filter-link" data-category="gaming&sports">Gaming & Sports</a></li>
+          </ul>
+          <hr>
+
+          <h6 class="fw-bold">Price</h6>
+          <input type="range" class="form-range" min="0" max="1000" step="50">
+          <p class="small text-muted">Adjust price range</p>
+          <hr>
+
+          <h6 class="fw-bold">Sort By</h6>
+          <select class="form-select">
+            <option>Newest</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Best Sellers</option>
+          </select>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Products Grid -->
+    <section class="col-md-9">
+      <div class="row g-4">
+        <!-- Product Card -->
+         {% for product in products %}
+<div class="col-md-4 col-sm-6 product-card-wrapper" data-category="{{ product.pCategory|lower }}" data-gender="{{ product.pGender|lower }}" >
+  <div class="card product-card shadow-sm h-100 position-relative" 
+    style="background-image: url('{{ product.pImage.url }}');">
+
+    <!-- Dark overlay -->
+    <div class="overlay"></div>
+
+    <!-- Fav & Cart buttons -->
+    <div class="position top-0 end-0 m-2 d-flex gap-2">
+     
+
+     
+     <button 
+          class="btn btn-light btn-sm btn-add-to-cart" 
+          onclick="addToCart({{ product.id }}, '{% url 'add_to_cart' product.id %}')">
+          <i class="bi bi-cart-plus"></i>
+        </button>
+
+      <button class="btn btn-light btn-sm fav-btn"><i class="bi bi-heart"></i></button>
+    </div>
+
+    <!-- Product info -->
+    <div class="card-body text-white">
+      <h5 class="card-title">{{ product.pName }}</h5>
+      <p class="price fw-bold">UGX {{ product.pPrice }}</p>
+      <p class="card-text description">{{ product.pDescription }} 
+</p>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+        
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<script>
+  const filterLinks = document.querySelectorAll('.filter-link');
+  const productCards = document.querySelectorAll('.product-card-wrapper');
+  let activeCategory = "all";
+  let activeGender = "all";
+
+  function applyFilters() {
+  productCards.forEach(card => {
+    const cardCategory = card.dataset.category;
+    const cardGender = card.dataset.gender;
+
+    if (
+      (activeCategory === "all" || cardCategory === activeCategory) &&
+      (activeGender === "all" || cardGender === activeGender)
+    ) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+
+  filterLinks.forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    activeCategory = link.dataset.category; // update
+
+    filterLinks.forEach(l => l.classList.remove("active"));
+    link.classList.add("active");
+
+    applyFilters(); // re-filter
+  });
+});
+
+
+
+  const filterbutton = document.querySelectorAll('.filterbutton');
+  
+
+  filterbutton.forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    activeGender = link.dataset.gender; // update
+    
+    
+    applyFilters(); // re-filter
+  });
+});
+// ...existing code...
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+
+
+
+</script>
+
+    
+{% endblock %}
+
+
+

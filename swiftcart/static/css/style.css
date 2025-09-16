@@ -1,0 +1,431 @@
+/* ##################globallllll */
+/* global headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* or Open Sans, Lato, etc */
+}
+
+a{
+  text-decoration: none;
+  color: black;
+
+}
+/* #############global endsss */
+
+
+
+
+
+/* ############nav style############## */
+/* navfavourites button */
+
+
+
+
+
+/* ##############index page styling##################### */
+/* Reduce product image height */
+.product-img {
+  height: 200px;
+  object-fit: cover;
+}
+/* Product card base */
+/* Product card */
+.product-card {
+  background-size: cover;
+  background-position: center;
+  min-height: 320px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.3s ease;
+  color: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Dark overlay for readability */
+.product-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Card body */
+.product-card .card-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 1rem;
+}
+.product-card .position-absolute {
+    z-index: 2; /* above overlay */
+}
+
+/* Title and price (always visible) */
+.product-card .card-title,
+.product-card .price {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Description container at bottom */
+.product-card .description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6); /* subtle backdrop for text */
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.4s ease;
+  border-top: 1px solid rgba(255,255,255,0.5); /* separator line */
+}
+
+/* Hover: show description */
+.product-card:hover .description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Favourite (heart) button for cart */
+.fav-btn {
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.fav-btn:hover {
+  background: #f8d7da;
+  color: red;
+}
+
+
+.cart-btn.active i {
+  color: green;
+}
+
+
+/* search bar styling */
+.search-bar {
+  border-bottom: 1px solid #eee;
+  z-index: 1030;
+}
+
+.search-form input {
+  border-radius: 50px;
+  padding-left: 20px;
+}
+
+.search-form input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 255, 98, 0.25);
+  border-color: 0 0 8px rgba(0, 255, 98, 0.25);
+}
+
+.search-form button {
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: rgba(0, 128, 49, 0.342);
+}
+
+
+/* filter bar */
+
+/* Filter bar styles */
+.filter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* centers them horizontally */
+  gap: 12px; /* space between links */
+}
+
+.filter-list li {
+  display: inline-block;
+}
+
+.filter-list a {
+  text-decoration: none;
+  color: #198754; /* Bootstrap success green */
+  font-weight: 500;
+  padding: 6px 16px;
+  /* border: 1px solid #198754; */
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* prevents text from breaking into 2 lines */
+}
+
+.filter-list a:hover,
+.filter-list a.active {
+  background-color: #198754;
+  color: #fff;
+}
+
+.filter-bar {
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  /* top: 70px; 
+  z-index: 1029; */
+}
+
+.filter-bar .btn {
+  transition: all 0.3s ease;
+}
+
+.filter-bar .btn.active,
+.filter-bar .btn:hover {
+  background-color: rgba(0, 128, 0, 0.459);
+  color: white;
+}
+
+
+
+/* sidebar */
+
+.sidebar-sticky .card {
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.sidebar-sticky .card-header {
+  background: linear-gradient(135deg, #198754, #28a745); /* nice gradient green */
+  border-bottom: none;
+  padding: 15px;
+  text-align: center;
+}
+
+.sidebar-sticky .card-header h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+.sidebar-sticky .card-body {
+  padding: 1.2rem;
+}
+
+.sidebar-sticky h6 {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+/* Links */
+
+/* Active filter link/button */
+.filter-link.active,
+.filterbutton.active {
+  background-color: #198754;  /* Bootstrap green */
+  color: #fff !important;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.sidebar-sticky .filter-link {
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  color: #198754;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.sidebar-sticky .filter-link:hover,
+.sidebar-sticky .filter-link.active {
+  background-color: #198754;
+  color: #fff;
+}
+
+/* Divider line */
+.sidebar-sticky hr {
+  margin: 1rem 0;
+  border-top: 1px solid #eee;
+}
+
+/* Price range */
+.sidebar-sticky .form-range {
+  accent-color: #198754;
+}
+
+/* Dropdown */
+.sidebar-sticky .form-select {
+  border-radius: 8px;
+  border-color: #ddd;
+  font-size: 0.9rem;
+}
+.filter-link {
+  display: block;
+  padding: 6px 0;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.filter-link:hover {
+  color: #0dfd35;
+  text-decoration: underline;
+}
+
+.sidebar-sticky {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+
+
+/* ###cart#### */
+/* Custom center popup styling */
+.custom-offcanvas {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 500px;  /* adjust width */
+  max-width: 90%;
+  height: auto !important;
+  max-height: 80vh;
+  border-radius: 12px;
+  background-color: #fff;
+  visibility: hidden;
+  transition: transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+/* When shown */
+.custom-offcanvas.show {
+  visibility: visible;
+}
+
+/* Optional overlay effect */
+.offcanvas-backdrop.show {
+  opacity: 0.5;
+}
+.quantity-control {
+  min-width: 100px;
+}
+
+.quantity-input {
+  width: 45px;
+}
+
+
+/* .offcanvas {
+  border-radius: 15px 0 0 15px;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+} */
+
+
+/* #####faves############ */
+
+/* Shared styling for cart & favourites */
+.offcanvas {
+  border-radius: 15px 0 0 15px;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+/* Buttons */
+.list-group-item button {
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+
+
+/* #############end index page styling################ */
+
+/* ####################login page#################### */
+/* body {
+  background: linear-gradient(135deg, #198754, #28a745);
+} */
+
+.login-card {
+  background: #fff;
+  max-width: 380px;
+  width: 100%;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.login-card h3 {
+  font-weight: 600;
+  color: #198754;
+}
+
+.form-control {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.btn-success {
+  font-weight: 600;
+  padding: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ###########login ends################### */
+
+/* ##################checkout page ######################## */
+.card {
+  border-radius: 12px;
+}
+
+.card-header {
+  border-radius: 12px 12px 0 0 !important;
+}
+
+#clearCart {
+  font-size: 0.85rem;
+}
+
+.badge.bg-secondary {
+  font-size: 0.8rem;
+}
+
+
+
+/* ###################checkou endsss ###################### */
