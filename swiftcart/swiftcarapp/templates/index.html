@@ -1,14 +1,7 @@
 {% extends 'base/nav.html' %}
 {% load static %}
 {% block content %}
-<!-- <h2 class="mb-4">Browse Products</h2> -->
 
-<!-- <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-  </div>
-</div> -->
 <!-- Search Bar -->
 <div class="search-bar bg-light py-3 shadow-sm sticky-top">
   <div class="container">
@@ -44,14 +37,13 @@
 
 <div class="container py-4">
   <div class="row">
-    <!-- Sidebar (Sticky) -->
+    <!-- Sidebar  -->
     <aside class="col-md-3 mb-4 sidebar-sticky">
       <div class="card shadow-sm">
         <div class="card-header bg-success text-white">
           <h5 class="mb-0">Categories</h5>
         </div>
         <div class="card-body">
-          <!-- <h6 class="fw-bold">Categories</h6> -->
           <ul class="list-unstyled">
              <li><a href="#" class="filter-link" data-category="all">All</a></li>
             <li><a href="#" class="filter-link" data-category="apparel">Aparrel</a></li>
@@ -148,7 +140,7 @@
   filterLinks.forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
-    activeCategory = link.dataset.category; // update
+    activeCategory = link.dataset.category; 
 
     filterLinks.forEach(l => l.classList.remove("active"));
     link.classList.add("active");
@@ -165,13 +157,13 @@
   filterbutton.forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
-    activeGender = link.dataset.gender; // update
+    activeGender = link.dataset.gender; 
     
     
     applyFilters(); // re-filter
   });
 });
-// ...existing code...
+
 
 function getCookie(name) {
     let cookieValue = null;

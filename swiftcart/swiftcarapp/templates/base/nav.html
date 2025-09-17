@@ -67,7 +67,7 @@
   {% block content %}{% endblock %}
 </main>
 
-<!-- Mini Cart Offcanvas -->
+
  
 <!-- Mini Cart Offcanvas -->
 <div class="offcanvas offcanvas-end custom-offcanvas shadow" tabindex="-1" id="miniCart">
@@ -147,61 +147,7 @@
   <p class="mb-0">&copy; 2025 SwiftCart | All rights reserved</p>
 </footer>
 <script>
-// document.addEventListener('DOMContentLoaded', function() {
-//     const csrfToken = '{{ csrf_token }}';
-//     const cartList = document.querySelector('#miniCart .list-group');
 
-//     cartList.addEventListener('click', function(e) {
-//         const target = e.target;
-//         const productId = target.dataset.product;
-//         if (!productId) return;
-
-//         // Increment
-//         if (target.classList.contains('btn-increment')) {
-//             fetch(`/swiftcarapp/increment/${productId}/`, {
-//                 method: 'POST',
-//                 headers: {'X-CSRFToken': csrfToken}
-//             })
-//             .then(res => res.json())
-//             .then(data => {
-//                 document.querySelector(`#qty-${productId}`).textContent = data.quantity;
-//                 document.querySelector(`#subtotal-${productId}`).textContent = 'UGX ' + data.subtotal;
-//                 document.querySelector('#cart-total').textContent = 'UGX ' + data.total_price;
-//             });
-//         }
-
-//         // Decrement
-//         if (target.classList.contains('btn-decrement')) {
-//             fetch(`/swiftcarapp/decrement/${productId}/`, {
-//                 method: 'POST',
-//                 headers: {'X-CSRFToken': csrfToken}
-//             })
-//             .then(res => res.json())
-//             .then(data => {
-//                 if (data.status === 'removed') {
-//                     document.querySelector(`#item-${productId}`).remove();
-//                 } else {
-//                     document.querySelector(`#qty-${productId}`).textContent = data.quantity;
-//                     document.querySelector(`#subtotal-${productId}`).textContent = 'UGX ' + data.subtotal;
-//                 }
-//                 document.querySelector('#cart-total').textContent = 'UGX ' + data.total_price;
-//             });
-//         }
-
-//         // Remove
-//         if (target.classList.contains('btn-remove')) {
-//             fetch(`/swiftcarapp/remove_from_cart/${productId}/`, {
-//                 method: 'POST',
-//                 headers: {'X-CSRFToken': csrfToken}
-//             })
-//             .then(res => res.json())
-//             .then(data => {
-//                 document.querySelector(`#item-${productId}`).remove();
-//                 document.querySelector('#cart-total').textContent = 'UGX ' + data.total_price;
-//             });
-//         }
-//     });
-// });
 function addToCart(productId) {
     fetch(`/swiftcarapp/add_to_cart/${productId}/`, {
       method: "GET",

@@ -14,13 +14,6 @@ urlpatterns=[
     path("checkout/", views.checkout, name="checkout"),
     path("login/",views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
-    # path("ajax/add-to-cart/", views.ajax_add_to_cart, name="ajax_add_to_cart"),
-
-    # path('cart/', views.view_cart, name='view_cart'),
-    # path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
-    # path('remove_from_cart/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
-    # path('increment_quantity/<int:product_id>/', views.increment_quantity, name='increment_quantity'),
-    # path('decrement_quantity/<int:product_id>/', views.decrement_quantity, name='decrement_quantity'),
     path("add-to-cart/<int:productId>/", views.add_to_cart, name="add_to_cart"),
     path("cart/", views.cart_view, name="cart"),
 
