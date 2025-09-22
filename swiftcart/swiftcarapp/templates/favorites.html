@@ -1,0 +1,29 @@
+{% extends 'base/nav.html' %}
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">My Favorites ❤️</h2>
+
+  {% if favorites %}
+    <div class="row">
+      {% for fav in favorites %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-img-top" 
+                 style="height:200px; background-size:cover; background-position:center; 
+                        background-image: url('{{ fav.product.pImage.url }}');">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ fav.product.name }}</h5>
+              <p class="card-text">{{ fav.product.description|truncatewords:15 }}</p>
+              <a href="{% url 'remove_from_favorites' fav.product.pk %}" 
+                 class="btn btn-sm btn-outline-danger">Remove 💔</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">No favorites yet. Browse products and add some ❤️</p>
+  {% endif %}
+</div>
+{% endblock %}

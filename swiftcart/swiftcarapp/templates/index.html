@@ -93,7 +93,14 @@
           <i class="bi bi-cart-plus"></i>
         </button>
 
-      <button class="btn btn-light btn-sm fav-btn"><i class="bi bi-heart"></i></button>
+         <form method="POST" action="{% url 'add_to_favorites' product.id %}" >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-light btn-sm fav-btn">
+                  <i class="bi {% if product.id in user_favorites %}bi-heart-fill text-danger{% else %}bi-heart{% endif %}"></i>
+                </button>
+              </form>
+
+      <!-- <button class="btn btn-light btn-sm fav-btn"><i class="bi bi-heart"></i></button> -->
     </div>
 
     <!-- Product info -->

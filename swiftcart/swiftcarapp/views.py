@@ -5,9 +5,9 @@ from django.contrib.auth import authenticate, logout
 from .forms import CustomUsercreationForm
 from django.views.decorators.cache import never_cache
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from .models import Product
+from .models import Product, Favorite
 from django.contrib.auth.decorators import login_required
-import json
+from cart.models import Cart, CartItem
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -69,28 +69,29 @@ def product(request):
 def checkout(request):
     return render(request, 'checkout.html')
 
-def add_to_cart(request, pk):
+
+
+
+@login_required
+def add_to_favorites(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    cart = request.session.get("cart", {})
-
-    if str(product.id) in cart:
-        cart[str(product.id)]["quantity"] += 1
+    fav, created = Favorite.objects.get_or_create(user=request.user, product=product)
+    if created:
+        messages.success(request, f"{product.pName} added to your favorites ")
     else:
-        cart[str(product.id)] = {
-            "name": product.pName,
-            "price": float(product.pPrice),
-            "quantity": 1,
-        }
+        messages.info(request, f"{product.pName} is already in your favorites")
+    return redirect(request.META.get('HTTP_REFERER', 'index'))
 
-    request.session["cart"] = cart
-    request.session.modified = True
 
-    total_qty = sum(item["quantity"] for item in cart.values())
-    total_price = sum(item["price"] * item["quantity"] for item in cart.values())
+@login_required
+def remove_from_favorites(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    Favorite.objects.filter(user=request.user, product=product).delete()
+    messages.warning(request, f"{product.pName} removed from your favorites ")
+    return redirect(request.META.get('HTTP_REFERER', 'favorites'))
 
-    return JsonResponse({"cart_count": total_qty, "total_price": total_price})
-def cart_view(request):
-    cart = request.session.get("cart", {})
-    return render(request, "cart.html", {"cart": cart})
-
+@login_required
+def my_favorites(request):
+    favorites = Favorite.objects.filter(user=request.user).select_related("product")
+    return render(request, "favorites.html", {"favorites": favorites})
 

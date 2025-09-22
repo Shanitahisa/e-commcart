@@ -1,0 +1,43 @@
+{% extends 'base/nav.html' %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<h2 class="mb-4">Your Shopping Cart</h2>
+{% if cart.items.all %}
+  <table class="table table-bordered align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart.items.all %}
+      <tr>
+        <td>{{ item.product.pName }}</td>
+        <td>UGX {{ item.product.pPrice }}</td>
+        <td>
+          <form action="{% url 'update_cart' item.id %}" method="POST">
+            {% csrf_token %}
+            <button name="action" value="decrease" class="btn btn-sm btn-outline-danger">−</button>
+            {{ item.quantity }}
+            <button name="action" value="increase" class="btn btn-sm btn-outline-success">+</button>
+          </form>
+        </td>
+        <td>UGX {{ item.subtotal }}</td>
+        <td>
+          <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-outline-danger">Remove</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4>Total: UGX {{ cart.total_price }}</h4>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+
+{% endblock %}
