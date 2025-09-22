@@ -87,11 +87,14 @@
      
 
      
-     <button 
-          class="btn btn-light btn-sm btn-add-to-cart" 
-          onclick="addToCart({{ product.id }}, '{% url 'add_to_cart' product.id %}')">
-          <i class="bi bi-cart-plus"></i>
-        </button>
+
+
+               <form method="POST" action="{% url 'add_to_cart' product.id %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-light btn-sm btn-add-to-cart" title="Add to Cart">
+                  <i class="bi {% if product.id in user_cart_items %}bi-cart-check-fill text-success{% else %}bi-cart-plus{% endif %}"></i>
+                </button>
+              </form>
 
          <form method="POST" action="{% url 'add_to_favorites' product.id %}" >
                 {% csrf_token %}

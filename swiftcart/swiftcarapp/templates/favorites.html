@@ -17,6 +17,7 @@
               <p class="card-text">{{ fav.product.description|truncatewords:15 }}</p>
               <a href="{% url 'remove_from_favorites' fav.product.pk %}" 
                  class="btn btn-sm btn-outline-danger">Remove 💔</a>
+                 
             </div>
           </div>
         </div>
