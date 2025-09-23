@@ -13,10 +13,18 @@
                         background-image: url('{{ fav.product.pImage.url }}');">
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{ fav.product.name }}</h5>
-              <p class="card-text">{{ fav.product.description|truncatewords:15 }}</p>
+              <h5 class="card-title">{{ fav.product.pName }}</h5>
+              <p class="card-text">UGX {{ fav.product.pPrice }}</p>
               <a href="{% url 'remove_from_favorites' fav.product.pk %}" 
                  class="btn btn-sm btn-outline-danger">Remove 💔</a>
+                
+                <form method="POST" action="{% url 'add_to_cart' fav.product.pk %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-success" title="Add to Cart">
+                  <i class="bi {% if product.id in user_cart_items %}bi-cart-check-fill text-success{% else %}bi-cart-plus{% endif %}"></i>
+                </button>
+              </form>
+             
                  
             </div>
           </div>

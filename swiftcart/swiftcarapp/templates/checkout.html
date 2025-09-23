@@ -48,28 +48,20 @@
       <div class="card shadow-sm rounded-3 mb-4">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
           <h5 class="mb-0">Order Summary</h5>
-          <button id="clearCart" class="btn btn-sm btn-outline-light">Clear Cart</button>
+          <a href="{% url 'clear_cart' %}" class="btn btn-sm btn-outline-light">Clear Cart</a>
+
         </div>
+
+        
         <div class="card-body">
           <ul class="list-group mb-3" id="orderSummary">
-            <!-- Example item -->
+            {% for item in cart.items.all %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Product 1 <span class="badge bg-secondary ms-2">x2</span></span>
-              <strong>UGX 240,000</strong>
+              <span>{{ item.product.pName }} <span class="badge bg-secondary ms-2">{{ item.quantity }}</span></span>
+              <strong>UGX {{ item.subtotal }}</strong>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Product 2 <span class="badge bg-secondary ms-2">x1</span></span>
-              <strong>UGX 80,000</strong>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Subtotal</span>
-              <span id="subtotal">UGX 320,000</span>
-            </li>
-            
-            <li class="list-group-item d-flex justify-content-between fw-bold">
-              <span>Total</span>
-              <span id="total">UGX 330,000</span>
-            </li>
+            {% endfor  %}
+           <li class="list-group-item d-flex justify-content-between align-items-center" style="color: red;"> <strong>Total: UGX {{ cart.total_price }}</strong></li>
           </ul>
         </div>
       </div>

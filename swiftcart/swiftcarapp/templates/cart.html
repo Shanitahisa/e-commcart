@@ -31,11 +31,17 @@
           <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-outline-danger">Remove</a>
         </td>
       </tr>
+      
       {% endfor %}
     </tbody>
   </table>
 
   <h4>Total: UGX {{ cart.total_price }}</h4>
+
+  <button type="button" class="btn btn-success" onclick="window.location.href='{% url 'checkout' %}';">
+  CHECKOUT
+</button>
+
 {% else %}
   <p>Your cart is empty.</p>
 {% endif %}

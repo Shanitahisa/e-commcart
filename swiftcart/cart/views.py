@@ -41,3 +41,4 @@ def update_cart(request, item_id):
 def cart_detail(request):
     cart = get_user_cart(request.user)
     return render(request, "cart.html", {"cart": cart})
+

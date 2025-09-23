@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from cart.models import Cart, CartItem
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from cart.utils import get_user_cart
 
 
 
@@ -64,10 +65,18 @@ def index(request):
 def product(request):
     return render(request, 'products.html')
 
+@login_required
+def clear_cart(request):
+    cart = get_user_cart(request.user)
+    cart.items.all().delete()
+    return redirect("cart_detail")
 
-
+@login_required
 def checkout(request):
-    return render(request, 'checkout.html')
+    cart = get_user_cart(request.user)
+    return render(request, 'checkout.html', {'cart': cart})
+
+
 
 
 

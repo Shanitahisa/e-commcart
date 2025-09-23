@@ -10,7 +10,9 @@ urlpatterns=[
     path("index/",views.index,name="index"),
     path("product/",views.product, name="product"),
     path("signup/", views.signup, name="signup"),
+    path("clear/", views.clear_cart, name="clear_cart"),
     path("checkout/", views.checkout, name="checkout"),
+
     path("login/",views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
   
